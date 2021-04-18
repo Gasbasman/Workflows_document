@@ -1,0 +1,84 @@
+---
+title: "dsfb2_workflows_portfolio_1punt2_Measuring the evolutionarily important goals of situations: Situational Affordances for Adaptive Problems_Nick_brown"
+author: "Bas Koppenaal"
+date: "15-4-2021"
+output: html_document
+---
+
+A: ok maar dat wordt een lange titel
+B: https://journals.sagepub.com/doi/10.1177/1474704915593662
+C: Yes
+D: https://journals.sagepub.com/doi/10.1177/1474704915593662 
+E: see list below
+  Study Purpose: Good and clear
+  Data Availability Statement: you can find all their data under Supplemental Material
+  Data Location: yes i can use all their data and code so far as i know 
+  Study Location: they give away where their study had taken place this was the Florida Atlantic University.
+  Author Review: good
+  Ethics Statement: yes they explain this under Participants
+  Funding Statement: yes they sayed they didnt get any funding
+  Code Availability: yes i can acces their code
+  
+f:  In Study 1 ( the study i look at), participants rated a recent situation they encountered using a preliminary version of the SAAP. Using factor analysis, the measure was reduced to 28 items. these situations are analysed using R. 
+G: de naam van de folder heet: Rmarkdown_portofolio
+H: https://osf.io/tcx9f/ het gaat over het artikel van hierboven. 
+I: Done
+J: first you open a document, than you use the code to compare the data with eachother and see if there are correlations. 
+K: 4: it doesnt really work but above every part of code it says what the code should do
+L: done dit heet 'study 1.R' en 'Study 1 data'
+M: i got it everything running with some chances,I changed everything where it says EDIT in the line
+N: i did everything where it says edit i chanced 
+O: ik had in het begin wat moeite maar met een beetje hulp en wat energy ging het helemaal goed 4/5. 
+P: ik vindt dit een beetje vage vraag: 
+
+maar de code die ik aangepast heb: regel 29 - 42 
+
+
+   #Load the dataset: Select Study 1 data.csv EDIT: ik heb de code hieronder vervangen door mijn eigen zodat hun document er gelijk in komt te staan. EDIT: ze gebruiken saapv met kleine en grote letters. ik verander het een beetje hier en alles groot gemaakt
+## saap <- read.csv(file.choose())
+
+SAAP <- read_excel("Lesson1/Study 1 data.xlsx")
+           
+           
+  #Subset the dataset for valid cases , EDIT: ik heb dit ook grote letters gemaakt
+##saapV <- saap[saap$Valid==1,]
+
+SAAPV <- SAAP[SAAP$Valid==1,]
+
+   #Check the dimension of the dataset EDIT: ik heb dit ook grote letters gemaakt
+## dim(saapV)
+dim(SAAPV)
+
+regel 238 - 240
+
+ #Choose SAAPcontent.csv  EDIT: ik snap niet precies welk bestand ze willen dat ik er nu in zet dus ik heb het eerste data bestand hier neergezet.
+##SAAP.content <- read.csv(file.choose())
+SAAP.content <- SAAP
+
+
+regel 271 tot 277
+## extra ) aan toegevoegd
+#Descriptive statistics for the sample
+  #Age
+describe(c(SAAPV$Age))
+
+  #Sex   EDIT: lijkt er op alsof dit de eerste keer is dat ze Sex in het stukje benoemen. ik pas het niet aan maar het geeft een error 
+table(SAAPV$Sex)
+
+https://osf.io/a2vx7/
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r cars}
+
+
+```
+
+
+```{r pressure, echo=FALSE}
+
+
+```

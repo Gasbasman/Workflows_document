@@ -1,0 +1,87 @@
+---
+title: "dsfb2_workflows_portfolio"
+author: "Bas Koppenaal"
+date: "12-4-2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(readxl)
+
+```
+
+A: Als ik het bestand in excel bekijk zie ik dat er datums worden ingevoerd maar dat je in de kollom alleen maar ######### ziet 
+
+B: Gedaan 
+
+C:    Bij RawData is er meerdere keren NA ingevuld
+      Bij Compname kan je zien dat er 5 verschillende componenten getest zijn: 2,6-diisopropylnaphthalene, decane, naphthalene, Ethanol en S-medium
+      Bij Compconcentration staan er soms wat rare getallen in: 
+
+D: ok
+
+E: compConcentrations = characters in plaats van getallen 
+
+F: opgelost
+
+(G) The positive control for this experiments is ethanol.. (H) The negative control for this experiment is S-medium.
+
+I: Ik zou als eerste kijken of de data normaal verdeeld is of niet met de Shapiro-Wilk test. H0: normaal verdeeld > 0.05. Als die normaal verdeeld is zou ik er een parametrische test op uitvoeren. Nu kan er met een ongepaarde steekproef gekeken worden of er een statistisch significant verschil zit tussen de gevonden waardes en de controles. als de data niet normaal verdeeld is dan kan er een mann-whitney Utest worden uitgevoerd. 
+
+J gedaan
+
+K je wilt het gemiddelde van alles af halen om te kijken of de componenten een effect hebben. de negatieve controle zou geen effect moeten hebben op de proef dus deze kan je van alles af halen waarna het effect over blijft. 
+
+```{r assignment C. elegans plate experiment}
+
+### Opdracht B
+C_elegans_data <- read_excel("Lesson1/CE.LIQ.FLOW.062_Tidydata.xlsx")
+View(C_elegans_data)
+
+### opdracht C
+
+view(unique(C_elegans_data$RawData))
+view(unique(C_elegans_data$compName))
+view(unique(C_elegans_data$compConcentration))
+
+##er gebeurt niet zoveel
+
+C_elegans_data %>% na.omit() %>% group_by(compName) %>% ggplot(aes(x = compConcentration, y = log10(RawData))) +
+  geom_line(aes(group = compName, colour = compName)) 
+
+## kijken naar class
+class(C_elegans_data$compConcentration)
+
+##exstra bestand creeën
+C_elegans_data1 <- C_elegans_data
+
+
+C_elegans_data1$compConcentration <- as.numeric(C_elegans_data1$compConcentration)
+
+## kijken of de class is veranderd
+
+Class(C_elegans_data1$compConcentration)
+
+## kijken of de grafiek nu wel lukt
+
+ C_elegans_data1 %>% group_by(compName) %>% ggplot(aes( x = log10(compConcentration), y = RawData)) +
+ geom_jitter(aes(group = compName, colour = compName, shape = expType))
+ 
+ ## normaal data
+ 
+ C_elegans_data2 <- C_elegans_data1
+
+Normal_data <- C_elegans_data1 %>%  group_by(expType) %>% filter(expType == 'controlNegative')
+
+C_elegans_data1$MeanRawData <- (C_elegans_data1$RawData - mean(Normal_data$RawData)) / sd(Normal_data$RawData)
+
+## J
+ C_elegans_data1 %>% group_by(compName) %>% ggplot(aes( x = log10(compConcentration), y = MeanRawData)) +
+ geom_jitter(aes(group = compName, colour = compName, shape = expType))
+```
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
