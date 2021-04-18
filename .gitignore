@@ -5,8 +5,8 @@
 # Session Data files
 .RData
 
-# ignore data file
-data/**
+# ignore data file if xls
+data/*.xls
 
 # User-specific files
 .Ruserdata
