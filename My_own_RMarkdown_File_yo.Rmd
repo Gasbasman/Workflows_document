@@ -9,6 +9,8 @@ This is my first RMarkdown file tracked by Git!!
 
 look at this shit, again
 
+4.2 wilt meer info
+
 
 ```{r setup, include=FALSE}
 ```
